@@ -95,15 +95,17 @@ async def play(ctx, arg):
 #Now Detecting Specific Words
 @client.event
 async def on_message(message):
-    if message.content == "bad message":
+    await client.process_commands(message)
+    if "bad message" in message.content:
         await message.delete()
-        await message.channel.send("Don't send bad messages!!!")
+        await message.channel.send("Don't send harmful messages!!!")
 #End
 
-
 @client.command()
-async def embed(ctx):
-    embed = discord.Embed(title = "Dog", url = "https://google.com", description = "We love dogs!", color = 0x34ebc3)
+async def python(ctx):
+    embed = discord.Embed(title = "I LOVE PYTHON", url = "https://www.python.org/downloads/", description = "It's great!", color = 0x34ebc3)
+    embed.set_author(name = ctx.author.display_name, icon_url = ctx.author.avatar.url)
+    embed.set_thumbnail(url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq0Pw0WiD1CJI4ZKFwmjP9uaatqk5ICQSglA&s")
     await ctx.send(embed = embed)
 
 client.run("put token here")
