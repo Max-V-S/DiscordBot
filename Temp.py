@@ -9,6 +9,14 @@ intent = discord.Intents.default()
 intent.members = True
 
 
+element = {"Be":"Beryllium","Mg":"Magnesium","Ca":"Calcium","Sr":"strontium","Ba":"Barium","Ra":"Radium"}
+amu = {"Be":9.012,"Mg":24.305,"Ca":40.078,"Sr":87.62,"Ba":137.33,"Ra":226}
+pro = {"Be":4,"Mg":12,"Ca":20,"Sr":38,"Ba":56,"Ra":88}
+img = {"Be":"https://periodictable.com/Samples/004.1/s9s.JPG","Mg":"https://periodictable.com/Samples/012.15/s9s.JPG","Ca":"https://periodictable.com/Samples/020.6/s9s.JPG","Sr":"https://periodictable.com/Samples/038.5/s9s.JPG","Ba":"https://periodictable.com/Samples/056.1/s9s.JPG","Ra":"https://static3.bigstockphoto.com/5/6/4/large1500/465459405.jpg"}
+neu = {"Be":5,"Mg":12,"Ca":20,"Sr":50,"Ba":81,"Ra":138}
+
+
+
 client = commands.Bot(command_prefix = "!",intents = discord.Intents.all())
 
 @client.event
@@ -120,7 +128,17 @@ async def embed(ctx):
     embed.add_field(name = "Field 2", value = "test value", inline = True) #Inline True == same line / Inline False == seperate lines
     embed.set_footer(text = "End of embed")
     await ctx.send(embed = embed)
-#possible ideas for enbeds: create an imbed for each element on the periodic table using dictionaries
+
+@client.command()
+async def info(ctx, ele):
+    embed = discord.Embed(title = element[ele], color = 0x34ebc3)
+    embed.set_author(name = ctx.author.display_name, icon_url = ctx.author.avatar.url)
+    embed.set_thumbnail(url = img[ele])
+    embed.add_field(name = "AMU", value = amu[ele], inline = False)
+    embed.add_field(name = "Protons/Electrons", value = pro[ele], inline = False) #Inline True == same line / Inline False == seperate lines
+    embed.add_field(name = "Neutrons", value = neu[ele], inline = False)
+    await ctx.send(embed = embed)
+
 
 
 #Error checking
@@ -147,6 +165,35 @@ async def on_reaction_remove(reaction,user):
 
 
 
-client.run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+client.run("token here")
 
 
